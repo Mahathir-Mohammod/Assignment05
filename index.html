@@ -26,5 +26,17 @@
             <button onclick="Loginhandle()" class="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition shadow-md">Sign In</button>
         </div>
     </div>
+
+    <script>
+        function Loginhandle() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            if(user === 'admin' && pass === 'admin123') {
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Access Denied');
+            }
+        }
+    </script>
 </body>
 </html>
