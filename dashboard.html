@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GitHub Issue tracker | DashBoard</title>
+    <!-- link font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+<!-- link css -->
+<link rel="stylesheet" href="C.css">
+<!-- daisyUI || TaliwindsCss -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    nigga
+    <nav class="bg-white border-b px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex items-center gap-2 font-bold text-lg">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-6" alt="logo">
+        <span>GitHub Issues Tracker</span>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+        <div class="relative w-full sm:w-64">
+            <input type="text" id="searchInput" placeholder="Search issues..." 
+                class="border rounded-md px-4 py-1.5 w-full outline-none bg-gray-50 text-sm">
+        </div>
+
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+            <button id="searchBtn" class="bg-[#1F2937] text-white px-6 py-1.5 rounded-md text-[14px] font-medium flex-1 sm:flex-none">
+                Search
+            </button>
+            <button class="bg-[#4F46E5] text-white px-4 py-1.5 rounded-md text-[14px] font-medium flex-1 sm:flex-none whitespace-nowrap">
+                + New Issue
+            </button>
+        </div>
+    </div>
+</nav>
 </body>
 </html>
