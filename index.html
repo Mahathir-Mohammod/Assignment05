@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Issue tracker | DashBoard</title>
+    <!-- link font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+<!-- link css -->
+<link rel="stylesheet" href="C.css">
+<!-- daisyUI || TaliwindsCss -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    hi there
+<body class="bg-gray-100 flex items-center justify-center h-screen p-4">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center">
+        <img src="assets/github-logo.png" alt="GitHub Logo" class="w-12 mx-auto mb-4">
+        <h1 class="text-2xl font-bold text-gray-800">Sign In</h1>
+        <p class="text-gray-500 mb-8">Access the Lab Issues Dashboard</p>
+        
+        <div class="space-y-4">
+            <input type="text" id="username" placeholder="Username" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black outline-none">
+            <input type="password" id="password" placeholder="Password" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black outline-none">
+            <button onclick="Loginhandle()" class="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition shadow-md">Sign In</button>
+        </div>
+    </div>
 </body>
 </html>
