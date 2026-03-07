@@ -90,3 +90,10 @@ function handleSearch() {
 
 document.getElementById('searchBtn').addEventListener('click', handleSearch);
 document.getElementById('searchInput').addEventListener('input', handleSearch);
+
+function applyFilter(statusType) {
+    const filtered = statusType === 'all' ? allIssues : allIssues.filter(issue => issue.status.toLowerCase() === statusType.toLowerCase());
+
+    issueCountText.innerText = `${filtered.length} Issues`;
+    renderCards(filtered);
+}
