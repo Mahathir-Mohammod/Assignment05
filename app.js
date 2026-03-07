@@ -52,3 +52,23 @@ function renderCards(issues) {
     }).join('');
 }
 
+async function fetchIssues() {
+    issueContainer.innerHTML = '';
+    if(loader) loader.classList.remove('hidden');
+
+    const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
+
+    try {
+        const res = await fetch(url);
+        const result = await res.json();
+        
+        allIssues = Array.isArray(result) ? result : (result.data || []);
+
+        applyFilter('all');
+    } catch (err) {
+        console.error("Fetch Error:", err);
+        issueCountText.innerText = "Error loading data";
+    } finally {
+        if(loader) loader.classList.add('hidden');
+    }
+}
