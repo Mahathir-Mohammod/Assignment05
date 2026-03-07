@@ -72,3 +72,18 @@ async function fetchIssues() {
         if(loader) loader.classList.add('hidden');
     }
 }
+
+function handleSearch() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    if (!query) {
+        const activeTab = document.querySelector('.tab-btn.bg-[#4F46E5]').dataset.status;
+        applyFilter(activeTab);
+        return;
+    }
+    const filteredResults = allIssues.filter(issue => 
+        issue.title.toLowerCase().includes(query)
+    );
+
+    issueCountText.innerText = `${filteredResults.length} Search Results`;
+    renderCards(filteredResults);
+}
