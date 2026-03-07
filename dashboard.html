@@ -28,14 +28,40 @@
         </div>
 
         <div class="flex items-center gap-2 w-full sm:w-auto">
-            <button id="searchBtn" class="bg-[#1F2937] text-white px-6 py-1.5 rounded-md text-[14px] font-medium flex-1 sm:flex-none">
-                Search
-            </button>
-            <button class="bg-[#4F46E5] text-white px-4 py-1.5 rounded-md text-[14px] font-medium flex-1 sm:flex-none whitespace-nowrap">
-                + New Issue
-            </button>
+            <button id="searchBtn" class="bg-[#1F2937] text-white px-6 py-1.5 rounded-md text-[14px] font-medium flex-1 sm:flex-none">Search</button>
+            <button class="bg-[#4F46E5] text-white px-4 py-1.5 rounded-md text-[14px] font-medium flex-1 sm:flex-none whitespace-nowrap">+ New Issue</button>
         </div>
     </div>
 </nav>
+
+<main class="max-w-6xl mx-auto mt-10 p-4">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+        
+        <div class="flex justify-center gap-2 mb-10">
+            <button data-status="all" class="tab-btn bg-[#4F46E5] text-white px-6 py-1.5 rounded-lg text-xs font-bold shadow-sm">All</button>
+            <button data-status="open" class="tab-btn bg-white text-gray-500 border border-gray-200 px-6 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-50">Open</button>
+            <button data-status="closed" class="tab-btn bg-white text-gray-500 border border-gray-200 px-6 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-50">Closed</button>
+        </div>
+
+        <div class="flex justify-between items-end mb-6">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-50 p-2.5 rounded-xl border border-indigo-100">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div>
+                    <h2 id="issueCount" class="text-xl font-extrabold text-gray-900 tracking-tight">0 Issues</h2>
+                    <p class="text-xs text-gray-400 font-medium">Track and manage your project issues</p>
+                </div>
+            </div>
+            <div class="flex gap-4 text-[11px] font-bold tracking-wide">
+                <span class="flex items-center gap-1.5 text-gray-600"><span class="w-2.5 h-2.5 rounded-full bg-green-500"></span> OPEN</span>
+                <span class="flex items-center gap-1.5 text-gray-600"><span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> CLOSED</span>
+            </div>
+        </div>
+
+        <div id="issueContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pt-6 border-t border-gray-100">
+            </div>
+    </div>
+</main>
 </body>
 </html>
