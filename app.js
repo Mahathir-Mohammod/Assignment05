@@ -87,3 +87,6 @@ function handleSearch() {
     issueCountText.innerText = `${filteredResults.length} Search Results`;
     renderCards(filteredResults);
 }
+
+document.getElementById('searchBtn').addEventListener('click', handleSearch);
+document.getElementById('searchInput').addEventListener('input', handleSearch);
