@@ -97,3 +97,46 @@ function applyFilter(statusType) {
     issueCountText.innerText = `${filtered.length} Issues`;
     renderCards(filtered);
 }
+
+async function openModal(id) {
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const result = await res.json();
+    const issue = Array.isArray(result) ? result[0] : (result.data || result);
+
+    const labelsHtml = (issue.labels || []).map(l => 
+        `<span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-[10px] font-bold border"># ${l}</span>`
+    ).join(' ');
+
+    document.getElementById('modalBody').innerHTML = `
+        <div class="mb-4">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">${issue.status}</span>
+                <span class="text-gray-400 text-[10px]">Opened by <b>${issue.author}</b> • ${new Date(issue.createdAt).toLocaleDateString()}</span>
+            </div>
+            <h2 class="text-xl font-bold text-gray-900">${issue.title}</h2>
+        </div>
+
+        <div class="mb-6">
+            <p class="text-[10px] font-bold text-gray-300 uppercase mb-2">Label</p>
+            <div class="flex gap-2">${labelsHtml}</div>
+        </div>
+
+        <div class="mb-8">
+            <p class="text-sm text-gray-600 leading-relaxed">${issue.description}</p>
+        </div>
+
+        <div class="flex gap-10 border-t pt-4">
+            <div>
+                <p class="text-[9px] text-gray-300 uppercase font-bold">Assignee</p>
+                <p class="text-xs font-bold text-gray-800">${issue.author}</p>
+            </div>
+            <div>
+                <p class="text-[9px] text-gray-300 uppercase font-bold">Priority</p>
+                <p class="text-xs font-bold text-red-500 uppercase">${issue.priority}</p>
+            </div>
+        </div>
+    `;
+    document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
