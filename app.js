@@ -134,9 +134,21 @@ async function openModal(id) {
                 <p class="text-[9px] text-gray-300 uppercase font-bold">Priority</p>
                 <p class="text-xs font-bold text-red-500 uppercase">${issue.priority}</p>
             </div>
-        </div>
-    `;
+        </div>`;
     document.getElementById('modalOverlay').classList.remove('hidden');
 }
 
 function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        tabs.forEach(t => {
+            t.classList.remove('bg-[#4F46E5]', 'text-white');
+            t.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
+        });
+        e.target.classList.add('bg-[#4F46E5]', 'text-white');
+        e.target.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
+        applyFilter(e.target.dataset.status);
+    });
+});
+
