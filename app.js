@@ -152,3 +152,7 @@ tabs.forEach(tab => {
     });
 });
 
+document.getElementById('searchBtn').addEventListener('click', () => {
+    fetchIssues('all', document.getElementById('searchInput').value);
+});
+fetchIssues();
