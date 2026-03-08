@@ -1,5 +1,5 @@
 const issueContainer = document.getElementById('issueContainer');
-const loader = document.getElementById('loader');
+const loader = document.getElementById('tabLoader');
 const issueCountText = document.getElementById('issueCount');
 const tabs = document.querySelectorAll('.tab-btn');
 
@@ -22,9 +22,8 @@ function renderCards(issues) {
             
             return `<span class="${colors} text-[10px] px-2 py-0.5 rounded-md border font-bold uppercase flex items-center gap-1">
                         <img src="assets/${l.replace(' ', '')}.png" class="w-2.5 h-2.5" onerror="this.style.display='none'"> 
-                        # ${l}
-                    </span>`;
-        }).join('');
+                        ${l}</span>`;
+                    }).join('');
 
         return `
             <div class="bg-white p-5 rounded-xl border border-gray-100 border-t-4 ${borderColor} shadow-sm hover:shadow-md transition cursor-pointer flex flex-col h-full" onclick="openModal('${issue.id}')">
@@ -68,7 +67,7 @@ async function fetchIssues() {
     } catch (err) {
         console.error("Fetch Error:", err);
         issueCountText.innerText = "Error loading data";
-    } finally {
+        
         if(loader) loader.classList.add('hidden');
     }
 }
@@ -76,8 +75,9 @@ async function fetchIssues() {
 function handleSearch() {
     const query = document.getElementById('searchInput').value.toLowerCase().trim();
     if (!query) {
-        const activeTab = document.querySelector('.tab-btn.bg-[#4F46E5]').dataset.status;
-        applyFilter(activeTab);
+        const activeTab = document.querySelector('.tab-btn.bg-\\[\\#4F46E5\\]');
+        const status = activeTab ? activeTab.dataset.status : 'all';
+        applyFilter(status);
         return;
     }
     const filteredResults = allIssues.filter(issue => 
@@ -96,21 +96,21 @@ function applyFilter(statusType) {
     tabLoader.classList.remove('hidden');
 
     setTimeout(() => {
-
-        const filtered = statusType === 'all'? allIssues : allIssues.filter(issue => issue.status.toLowerCase() === statusType.toLowerCase());
+        const filtered = statusType === 'all' ? allIssues : allIssues.filter(issue => issue.status.toLowerCase() === statusType.toLowerCase());
+        
         issueCountText.innerText = `${filtered.length} Issues`;
         renderCards(filtered);
 
         tabLoader.classList.add('hidden');
         issueContainer.classList.remove('hidden');
-    }, 500);
+    }, 300);
 }
 
 tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
         const clickedTab = e.currentTarget;
         if (clickedTab.classList.contains('bg-[#4F46E5]')) return;
-        
+
         tabs.forEach(t => {
             t.classList.remove('bg-[#4F46E5]', 'text-white');
             t.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
@@ -163,19 +163,6 @@ async function openModal(id) {
 
 function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
 
-tabs.forEach(tab => {
-    tab.addEventListener('click', (e) => {
-        tabs.forEach(t => {
-            t.classList.remove('bg-[#4F46E5]', 'text-white');
-            t.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
-        });
-        e.target.classList.add('bg-[#4F46E5]', 'text-white');
-        e.target.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
-        applyFilter(e.target.dataset.status);
-    });
-});
+document.getElementById('searchBtn').addEventListener('click', handleSearch);
 
-document.getElementById('searchBtn').addEventListener('click', () => {
-    fetchIssues('all', document.getElementById('searchInput').value);
-});
 fetchIssues();
