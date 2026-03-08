@@ -88,15 +88,38 @@ function handleSearch() {
     renderCards(filteredResults);
 }
 
-document.getElementById('searchBtn').addEventListener('click', handleSearch);
-document.getElementById('searchInput').addEventListener('input', handleSearch);
-
 function applyFilter(statusType) {
-    const filtered = statusType === 'all' ? allIssues : allIssues.filter(issue => issue.status.toLowerCase() === statusType.toLowerCase());
+    const tabLoader = document.getElementById('tabLoader');
+    const issueContainer = document.getElementById('issueContainer');
 
-    issueCountText.innerText = `${filtered.length} Issues`;
-    renderCards(filtered);
+    issueContainer.classList.add('hidden');
+    tabLoader.classList.remove('hidden');
+
+    setTimeout(() => {
+
+        const filtered = statusType === 'all'? allIssues : allIssues.filter(issue => issue.status.toLowerCase() === statusType.toLowerCase());
+        issueCountText.innerText = `${filtered.length} Issues`;
+        renderCards(filtered);
+
+        tabLoader.classList.add('hidden');
+        issueContainer.classList.remove('hidden');
+    }, 500);
 }
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        const clickedTab = e.currentTarget;
+        if (clickedTab.classList.contains('bg-[#4F46E5]')) return;
+        
+        tabs.forEach(t => {
+            t.classList.remove('bg-[#4F46E5]', 'text-white');
+            t.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
+        });
+        clickedTab.classList.add('bg-[#4F46E5]', 'text-white');
+        clickedTab.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
+        applyFilter(clickedTab.dataset.status);
+    });
+});
 
 async function openModal(id) {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
